@@ -1,0 +1,39 @@
+<?php
+$kalori_per_makan = 2500;
+$fu = array(
+    'senin' => 3,
+    'selasa' => 2,
+    'rabu' => 2,
+    'kamis' => 3,
+    'jumat' => 3,
+    'sabtu' => 2,
+    'minggu' => 1
+);
+
+$istirahat_per_hari = array(
+    'senin' => 5,
+    'selasa' => 6,
+    'rabu' => 8,
+    'kamis' => 8,
+    'jumat' => 5,
+    'sabtu' => 6,
+    'minggu' => 4
+);
+
+$total_kalori = 0;
+$total_istirahat = 0;
+
+foreach ($fu as $hari => $frekuensi) {
+    $total_kalori += $kalori_per_makan * $frekuensi;
+}
+
+foreach ($istirahat_per_hari as $hari => $jam) {
+    $total_istirahat += $jam;
+}
+
+if ($total_kalori >= 17500 && $total_istirahat >= 42) {
+    echo "Fu sudah sembuh!";
+} else {
+    echo "Fu masih sakit.";
+}
+?>
