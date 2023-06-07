@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Aplikasi Handphone</title>
+</head>
+<body>
+    <h1>Daftar Handphone</h1>
+
+    <?php
+    // Daftar handphone
+    $handphone = array(
+        array("merk" => "Samsung", "harga" => 5000000),
+        array("merk" => "iPhone", "harga" => 10000000),
+        array("merk" => "Xiaomi", "harga" => 3000000),
+        array("merk" => "OPPO", "harga" => 4000000)
+    );
+
+    // Menampilkan daftar handphone
+    echo "<ul>";
+    foreach ($handphone as $hp) {
+        echo "<li>".$hp['merk']." - Rp ".$hp['harga']."</li>";
+    }
+    echo "</ul>";
+
+    // Mengecek apakah ada pencarian
+    if (isset($_POST['merk']) && isset($_POST['harga'])) {
+        $merk = $_POST['merk'];
+        $harga = $_POST['harga'];
+
+        // Mencari handphone sesuai dengan merek dan harga
+        $handphoneTerpilih = null;
+        foreach ($handphone as $hp) {
+            if ($hp['merk'] == $merk && $hp['harga'] <= $harga) {
+                $handphoneTerpilih = $hp;
+                break;
+            }
+        }
+
+        // Memproses pencarian
+        if ($handphoneTerpilih != null) {
+            echo "<h2>Handphone yang cocok dengan kriteria:</h2>";
+            echo "<p>Merk: ".$handphoneTerpilih['merk']."</p>";
+            echo "<p>Harga: Rp ".$handphoneTerpilih['harga']."</p>";
+        } else {
+            echo "<h2>Tidak ada handphone dengan merek dan harga tersebut.</h2>";
+        }
+    }
+    ?>
+
+    <!-- Form pencarian -->
+    <form method="POST" action="">
+        <label for="merk">Pilih merek:</label>
+        <select name="merk" id="merk">
+            <option value="Samsung">Samsung</option>
+            <option value="iPhone">iPhone</option>
+            <option value="Xiaomi">Xiaomi</option>
+            <option value="OPPO">OPPO</option>
+        </select>
+        <br><br>
+        <label for="harga">Harga maksimum:</label>
+        <input type="number" name="harga" id="harga" min="0">
+        <br><br>
+        <input type="submit" value="Cari">
+    </form>
+
+</body>
+</html>
